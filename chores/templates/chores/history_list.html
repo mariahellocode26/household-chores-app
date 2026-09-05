@@ -1,0 +1,19 @@
+{% extends "chores/base.html" %}
+
+{% block title %}History — Household Chores{% endblock %}
+
+{% block content %}
+  <h1>History</h1>
+
+  {% if week_starts %}
+  <ul class="week-list">
+    {% for week_start in week_starts %}
+    <li>
+      <a href="{% url 'history_detail' week_start|date:'Y-m-d' %}">Week of {{ week_start|date:"N j, Y" }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="meta">No weeks recorded yet.</p>
+  {% endif %}
+{% endblock %}

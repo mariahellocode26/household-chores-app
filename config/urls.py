@@ -22,5 +22,8 @@ from chores import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", views.home, name="home"),
+    path("", views.dashboard, name="dashboard"),
+    path("tasks/<int:completion_id>/toggle/", views.toggle_task, name="toggle_task"),
+    path("history/", views.history_list, name="history_list"),
+    path("history/<str:week_start>/", views.history_detail, name="history_detail"),
 ]

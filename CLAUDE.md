@@ -4,10 +4,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project status
 
-This repository currently contains **planning documents only** — no Django project has been scaffolded yet (no `manage.py`, no app code, no dependency manifest). The two files below are the source of truth and should be read before doing any work here:
+The two files below are the source of truth for scope and work order, and should be read before doing any work here:
 
 - [`_docs/plan.md`](_docs/plan.md) — the full MVP scope: domain model, rules, and an explicit "Out of Scope" list.
-- [`_docs/tasks.md`](_docs/tasks.md) — the implementation backlog, ordered so each task is small and independently handoff-able. **Task 1 is "empty project with a passing test"** — once it's done, this file's Commands section below should be filled in with the real build/test/lint commands and kept in sync as the project evolves.
+- [`_docs/tasks.md`](_docs/tasks.md) — the implementation backlog, ordered so each task is small and independently handoff-able.
+
+Task 1 ("empty project with a passing test") is done: a Django project (`config`) and a first app (`chores`) are scaffolded, with a trivial passing test. From here, work proceeds task-by-task through `_docs/tasks.md`; keep the Commands section below current as tooling is added.
+
+### Local environment notes
+
+- Python 3.14 and Django 6.x are used, but this dev container only ships Python 3.12 by default — Python 3.14 was installed via the deadsnakes PPA (`sudo add-apt-repository ppa:deadsnakes/ppa`) into `.venv`.
+- PostgreSQL 18 runs via Docker (`docker-compose.yml`, official `postgres:18` image) rather than a system install — the container is the intended way to get Postgres here, not `apt install postgresql`.
+- The `postgres:18` image changed its default data directory convention from `/var/lib/postgresql/data` to `/var/lib/postgresql`; `docker-compose.yml` already accounts for this — don't "fix" the volume path back to `.../data`, it will fail to start.
 
 ## Chosen stack
 
@@ -29,7 +37,35 @@ The core model chain is: **Apartment → Areas → Tasks → Weekly Assignment �
 
 ## Commands
 
-Not yet established — this repository has no scaffolded project. Once `_docs/tasks.md` task 1 lands, replace this section with the actual commands for running the dev server, running the full test suite, running a single test, and any lint/format tooling, and keep it current as tooling is added.
+```
+# Start PostgreSQL 18 (via Docker)
+docker compose up -d db
+
+# One-time env setup
+python3.14 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+cp .env.example .env   # adjust if needed; loaded automatically by config/settings.py
+
+# Apply migrations
+.venv/bin/python manage.py migrate
+
+# Run the dev server
+.venv/bin/python manage.py runserver
+
+# Run the full test suite (either works; both are configured)
+.venv/bin/python manage.py test
+.venv/bin/python -m pytest
+
+# Run a single test
+.venv/bin/python manage.py test chores.tests.HomeViewTests.test_home_returns_200
+.venv/bin/python -m pytest chores/tests.py::HomeViewTests::test_home_returns_200
+```
+
+There is no lint/format tooling configured yet. If one is added (e.g. ruff, black), document its commands here.
+
+## Git / GitHub workflow
+
+Do not commit, push, create branches, open pull requests, or merge anything unless the user explicitly asks for it in that session. Finishing a task's code is not, by itself, permission to commit it — wait to be asked, even if a previous task in this same project was committed/pushed/PR'd without much friction.
 
 ## Things to be careful about
 

@@ -1,0 +1,36 @@
+{% extends "chores/base.html" %}
+
+{% block title %}Week of {{ week_start|date:"N j, Y" }} — History{% endblock %}
+
+{% block content %}
+  <h1>Week of {{ week_start|date:"N j, Y" }}</h1>
+  <p class="meta"><a href="{% url 'history_list' %}">&larr; Back to History</a></p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Roommate</th>
+        <th>Assigned Area</th>
+        <th>Tasks</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in rows %}
+      <tr>
+        <td>{{ row.roommate.name }}</td>
+        <td>{{ row.area.name }}</td>
+        <td>
+          <div class="task-list">
+            {% for completion in row.completions %}
+            <label>
+              <input type="checkbox" disabled {% if completion.completed %}checked{% endif %}>
+              {{ completion.task.name }}
+            </label>
+            {% endfor %}
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
