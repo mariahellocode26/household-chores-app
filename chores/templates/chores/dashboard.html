@@ -1,0 +1,32 @@
+{% extends "chores/base.html" %}
+
+{% block content %}
+  <h1>This week's chores</h1>
+  <p class="meta">Week of {{ week_start|date:"N j, Y" }}</p>
+  {% include "chores/_progress.html" %}
+
+  <table>
+    <thead>
+      <tr>
+        <th>Roommate</th>
+        <th>Assigned Area</th>
+        <th>Tasks</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in rows %}
+      <tr>
+        <td>{{ row.roommate.name }}</td>
+        <td>{{ row.area.name }}</td>
+        <td>
+          <div class="task-list">
+            {% for completion in row.completions %}
+            {% include "chores/_task_checkbox.html" %}
+            {% endfor %}
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

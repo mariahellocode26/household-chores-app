@@ -1,0 +1,125 @@
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #222;
+  background: #fafafa;
+  margin: 0;
+  padding: 2rem;
+}
+
+nav {
+  display: flex;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+nav a {
+  color: #444;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: #111;
+  text-decoration: underline;
+}
+
+h1 {
+  margin-bottom: 0.25rem;
+}
+
+.meta {
+  color: #666;
+  margin-top: 0;
+}
+
+#progress {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 1rem 0 1.5rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 900px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+th,
+td {
+  padding: 1rem 1.25rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+th {
+  background: #f3f4f6;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: #555;
+}
+
+tbody tr:hover {
+  background: #fafbff;
+}
+
+td:first-child,
+td:nth-child(2) {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.task-list label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+}
+
+.task-list input[type="checkbox"] {
+  width: 1.15rem;
+  height: 1.15rem;
+  cursor: pointer;
+}
+
+.task-list label:has(input:disabled) {
+  cursor: default;
+  color: #888;
+}
+
+.week-list {
+  list-style: none;
+  padding: 0;
+  max-width: 900px;
+}
+
+.week-list li {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.week-list a {
+  display: block;
+  padding: 0.85rem 1.25rem;
+  color: #222;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.week-list a:hover {
+  background: #fafbff;
+}

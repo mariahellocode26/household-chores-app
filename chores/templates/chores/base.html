@@ -1,0 +1,17 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Household Chores{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'chores/css/style.css' %}">
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+</head>
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <nav>
+    <a href="{% url 'dashboard' %}">Dashboard</a>
+    <a href="{% url 'history_list' %}">History</a>
+  </nav>
+  {% block content %}{% endblock %}
+</body>
+</html>

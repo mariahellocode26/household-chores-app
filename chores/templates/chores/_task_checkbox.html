@@ -1,0 +1,11 @@
+<label id="task-{{ completion.id }}">
+  <input
+    type="checkbox"
+    {% if completion.completed %}checked{% endif %}
+    hx-post="{% url 'toggle_task' completion.id %}"
+    hx-trigger="change"
+    hx-target="#task-{{ completion.id }}"
+    hx-swap="outerHTML"
+  >
+  {{ completion.task.name }}
+</label>
